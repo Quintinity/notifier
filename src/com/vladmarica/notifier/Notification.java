@@ -5,6 +5,9 @@ import java.util.List;
 
 public class Notification {
 
+    public static final int TIMEOUT_DEFAULT = -1;
+    public static final int TIMEOUT_NEVER_EXPIRE = 0;
+
     public enum ClosedReason {
         EXPIRED(1),
         DISMISSED(2),
@@ -22,6 +25,9 @@ public class Notification {
     private String body;
     private NotificationClosedListener closedListener;
     private List<Action> actions;
+    private String icon = "";
+    private int timeoutMs = TIMEOUT_DEFAULT;
+    private String imagePath = null;
 
     public Notification(String appName, String title, String body) {
         this.appName = appName;
@@ -50,7 +56,35 @@ public class Notification {
         return this.body;
     }
 
-    public void addAction(String actionId, String displayText) {
+    public void setIcon(String iconName) {
+        this.icon = iconName;
+    }
+
+    public String getIcon() {
+        return this.icon;
+    }
+
+    public void setTimeout(int ms) {
+        if (ms < TIMEOUT_DEFAULT) {
+            throw new IllegalArgumentException("Invalid timeout, must be positive or TIMEOUT_DEFAULT");
+        }
+
+        this.timeoutMs = ms;
+    }
+
+    public int getTimeout() {
+        return this.timeoutMs;
+    }
+
+    public void setImagePath(String path) {
+        this.imagePath = path;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void addAction(String actionId, String displayText, NotificationActionListener actionListener) {
         for (Action existingAction : this.actions) {
             if (existingAction.id.equals(actionId)) {
                 throw new IllegalArgumentException(
@@ -58,7 +92,7 @@ public class Notification {
             }
         }
 
-        actions.add(new Action(actionId, displayText));
+        actions.add(new Action(actionId, displayText, actionListener));
     }
 
     public List<Action> getActions() {
@@ -68,10 +102,12 @@ public class Notification {
     public class Action {
         public final String id;
         public final String displayText;
+        public NotificationActionListener actionListener;
 
-        public Action(String id, String displayText) {
+        public Action(String id, String displayText, NotificationActionListener actionListener) {
             this.id = id;
             this.displayText = displayText;
+            this.actionListener = actionListener;
         }
     }
 

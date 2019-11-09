@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.vladmarica.notifier</groupId>
+    <artifactId>notifier</artifactId>
+    <version>0.1</version>
+
+    <name>Notifier</name>
+    <description>A Java library for sending desktop notifications over DBus</description>
+
+    <scm>
+        <url>https://github.com/Quintinity/notifier/</url>
+        <connection>scm:git:git://github.com/Quintinity/notifier.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/Quintinity/notifier.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.hypfvieh</groupId>
+            <artifactId>dbus-java</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+    </dependencies>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <email>vmarica@unb.com</email>
+            <name>Vlad Marica</name>
+            <url>https://github.com/Quintinity</url>
+            <id>quintinity</id>
+        </developer>
+    </developers>
+
+    <distributionManagement>
+        <repository>
+            <id>bintray-vladmarica-maven</id>
+            <name>vladmarica-maven</name>
+            <url>https://api.bintray.com/maven/vladmarica/vladmarica-maven/com.vladmarica.notifier:notifier/;publish=1</url>
+        </repository>
+    </distributionManagement>
+</project>

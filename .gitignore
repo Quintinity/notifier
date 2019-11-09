@@ -2,3 +2,4 @@ bazel/
 bazel-out
 .ijwb/
 .bazelrc
+dist/*.jar
