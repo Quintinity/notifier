@@ -12,7 +12,6 @@ public class NotificationWithListeners {
                     "Floppy Disk Inserted",
                     "A floppy disk has just been inserted into the machine.");
             notification.setIcon("media-floppy");
-            notification.setImagePath("/home/vlad/Desktop/ayy.png");
             notification.setTimeout(Notification.TIMEOUT_DEFAULT);
 
             notification.addAction("view", "View",
