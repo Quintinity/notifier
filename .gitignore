@@ -1,0 +1,4 @@
+bazel/
+bazel-out
+.ijwb/
+.bazelrc
