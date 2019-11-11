@@ -8,7 +8,7 @@ This library is distributed as a Maven package, currently only available on the 
 
 ```
 <dependency>
-    <groupId>com.vladmarica.notifier</groupId>
+    <groupId>main.java.notifier</groupId>
     <artifactId>notifier</artifactId>
     <version>0.1</version>
 </dependency>

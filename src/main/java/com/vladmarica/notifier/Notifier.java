@@ -8,8 +8,8 @@ import org.freedesktop.dbus.types.Variant;
 import java.util.*;
 
 public class Notifier {
-    private static String NOTIFICATIONS_BUS_NAME = "org.freedesktop.Notifications";
-    private static String NOTIFICATIONS_OBJECT_NAME = "/org/freedesktop/Notifications";
+    static String NOTIFICATIONS_BUS_NAME = "org.freedesktop.Notifications";
+    static String NOTIFICATIONS_OBJECT_NAME = "/org/freedesktop/Notifications";
     private static NotificationClosedListener NO_OP_CLOSED_LISTENER = (id, reason) -> {};
 
     private static Map<Integer, Notification.ClosedReason> valueToClosedReasonEnumMap = new HashMap<>();
@@ -98,6 +98,10 @@ public class Notifier {
         return id.longValue();
     }
 
+    public void closeNotification(long notificationId) {
+        notificationsInterface.closeNotification(new UInt32(notificationId));
+    }
+
     public void close() {
         if (connection.isConnected()) {
             connection.disconnect();
@@ -131,6 +135,16 @@ public class Notifier {
     public static Notifier create() throws NotificationsException {
         try {
             return new Notifier(DBusConnection.getConnection(DBusConnection.DBusBusType.SESSION));
+        }
+        catch (DBusException ex) {
+            throw new NotificationsException(ex);
+        }
+    }
+
+    // VisibleForTesting
+    static Notifier create(String dbusPath) throws NotificationsException{
+        try {
+            return new Notifier(DBusConnection.getConnection(dbusPath));
         }
         catch (DBusException ex) {
             throw new NotificationsException(ex);

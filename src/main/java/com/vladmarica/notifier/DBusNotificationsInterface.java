@@ -2,6 +2,8 @@ package com.vladmarica.notifier;
 
 import org.freedesktop.dbus.annotations.DBusInterfaceName;
 import org.freedesktop.dbus.annotations.DBusMemberName;
+import org.freedesktop.dbus.annotations.MethodError;
+import org.freedesktop.dbus.annotations.MethodNoReply;
 import org.freedesktop.dbus.exceptions.DBusException;
 import org.freedesktop.dbus.interfaces.DBusInterface;
 import org.freedesktop.dbus.messages.DBusSignal;
@@ -19,6 +21,9 @@ interface DBusNotificationsInterface extends DBusInterface {
     @DBusMemberName("Notify")
     UInt32 sendNotification(String appName, UInt32 replaceId, String appIcon, String summary, String body,
                             String[] actions, Map<String, Variant> hints, int timeout);
+
+    @DBusMemberName("CloseNotification")
+    void closeNotification(UInt32 id);
 
     class NotificationClosed extends DBusSignal {
         public final UInt32 notificationId;

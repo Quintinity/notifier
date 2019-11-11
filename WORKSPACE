@@ -17,6 +17,7 @@ maven_install(
     artifacts = [
         "com.github.hypfvieh:dbus-java:3.2.0",
         "org.slf4j:slf4j-simple:1.7.29",
+        "junit:junit:4.12",
     ],
     fetch_sources = True,
     repositories = [
